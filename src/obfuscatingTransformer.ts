@@ -72,11 +72,11 @@ export function obfuscatingTransformer({
           ? result
           : result.ast
             ? (generate(result.ast, {
-                filename: props.filename,
-                retainLines: true,
-                sourceMaps: true,
-                sourceFileName: props.filename,
-              }) as MetroTransformerResult)
+              filename: props.filename,
+              retainLines: true,
+              sourceMaps: true,
+              sourceFileName: props.filename,
+            }) as MetroTransformerResult)
             : { code: "", map: "" }
 
         if (!code) {
@@ -93,7 +93,7 @@ export function obfuscatingTransformer({
             path.basename(props.filename),
             "obfuscated",
           )
-          fs.writeFileSync(path.join(emitDir, filename), code)
+          fs.writeFileSync(path.join(emitDir, filename), obfuscateCode(code, obfuscatorOptions));
         }
 
         return maybeTransformMetroResult(
